@@ -7,7 +7,11 @@
     },
     "parser": "babel-eslint",
     "extends": "airbnb",
-    "rules": { "react/jsx-filename-extension": [0] },
+    "plugins": ["prettier"],
+    "rules": { 
+      "react/jsx-filename-extension": [0],
+      "prettier/prettier": "error"
+     },
     "globals": {
         "__DEV__": true
     }
