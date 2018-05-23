@@ -1,9 +1,10 @@
 /* eslint react/prop-types: 0 */
-import React from 'react';
+import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, Button } from 'react-native';
-import { SafeAreaView, createBottomTabNavigator } from 'react-navigation';
+import { SafeAreaView, View, createBottomTabNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
+import PriceAPI from './utils/PriceAPI';
 
 const styles = StyleSheet.create({
   container: {
@@ -41,11 +42,33 @@ const Quiz = ({ navigation }) => (
   </SafeAreaView>
 );
 
-const Trade = () => (
-  <SafeAreaView style={[styles.container, { backgroundColor: '#6a51ae' }]}>
-    <Text style={[styles.paragraph, { color: '#fff' }]}>Trade Screen</Text>
-  </SafeAreaView>
-);
+class Trade extends Component {
+  static navigationOptions = {
+    title: 'Home',
+  };
+
+  state = {
+    contacts: [],
+  };
+
+  componentDidMount() {
+    PriceAPI().then((contacts) => {
+      debugger;
+      this.setState({ contacts });
+    });
+  }
+
+  render() {
+    return (
+      <SafeAreaView style={[styles.container, { backgroundColor: '#6a51ae' }]}>
+        {/* <View> */}
+        <Text>{JSON.stringify(this.state.contacts)}</Text>
+        {/* </View> */}
+        <Text style={[styles.paragraph, { color: '#fff' }]}>Trade Screen</Text>
+      </SafeAreaView>
+    );
+  }
+}
 
 export default createBottomTabNavigator(
   {
